@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import LinerLogo from '../static/images/liner_logo.png'
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../elements/SearchBar';
 
 const Home = () => {
     return (
@@ -15,7 +15,8 @@ const Home = () => {
 export default Home;
 
 const StyCon = styled.div`
-  height: 768px;
+
+  margin-top: 360px;
   display: flex;
   align-items: center;
   flex-direction: column;

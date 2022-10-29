@@ -151,6 +151,7 @@ const StyCon = styled.div`
     margin: 0;
     border: none;
     background-color: transparent;
+    cursor: pointer;
   }
 
   .CancelIcon {

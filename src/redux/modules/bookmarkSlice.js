@@ -6,7 +6,8 @@ export const postBookmarkThunk = createAsyncThunk(
   "postBookmarkThunk",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await instance.post(`collection/document/{document-${payload}}`);
+      const { data } = await instance.post(`collection/document/{document-${payload}}`
+      );
       return thunkAPI.fulfillWithValue(data.documents);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -19,7 +20,8 @@ export const deleteBookmarkThunk = createAsyncThunk(
   "deleteBookmarkThunk",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await instance.delete(`collection/document/{document-${payload}}`);
+      const { data } = await instance.delete(`collection/document/{document-${payload}}`
+      );
       return thunkAPI.fulfillWithValue(data.documents);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -28,7 +30,6 @@ export const deleteBookmarkThunk = createAsyncThunk(
 );
 
 const initialState = {
-  status: [],
   isLoading: false,
   error: null,
 };
@@ -42,26 +43,24 @@ const searchSlice = createSlice({
     },
   },
   extraReducers: {
-    // Getting all the search results from given condition
+    // posting bookmark for the search result
     [postBookmarkThunk.pending]: (state) => {
       state.isLoading = true;
     },
     [postBookmarkThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.results = action.payload;
     },
     [postBookmarkThunk.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
 
-    // Getting the search results when scrolled to the bottom of the page
+    // delete bookmark for the search result
     [deleteBookmarkThunk.pending]: (state) => {
       state.isLoading = false;
     },
     [deleteBookmarkThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.results = [...state.results].concat(action.payload);
     },
     [deleteBookmarkThunk.rejected]: (state, action) => {
       state.isLoading = false;

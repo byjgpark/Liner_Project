@@ -14,9 +14,9 @@ const Header = () => {
 
   return (
     <StyCon>
-      <button className="BackBtn" onClick={() => navigate(-1)}>
+      <div className="BackWrap" onClick={() => navigate(-1)}>
         <img className="BackIcon" src={BackIcon} alt="back-icon" />
-      </button>
+      </div>
       <SearchBar></SearchBar>
     </StyCon>
   );
@@ -36,16 +36,31 @@ const StyCon = styled.div`
   height: 78px;
   width: 100%;
 
-  .BackBtn {
-    border: none;
+  .BackWrap {
+    width: 40px;
+    height: 40px;
     padding: 0;
-    margin-left: 46.1px;
-    margin-right: 26.1px;
-    background-color: transparent;
+
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    border: none;
+    border-radius: 12px;
+
+    margin-left: 32px;
+    margin-right: 12px;
+
+    &:hover{
+        background-color: rgba(248, 249, 251, 1);
+    }
+
   }
 
   .BackIcon {
     width: 11.8px;
     height: 21px;
+    cursor: pointer;
   }
 `;

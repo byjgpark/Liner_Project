@@ -10,8 +10,6 @@ import { changeError } from "../redux/modules/searchSlice";
 
 const ErrorModal = ({ onClose, closeModal, errorFlag}) => {
 
- console.log('check errorFlag', errorFlag);
-
  // Redux : dispatch
  const dispatch = useDispatch();
 
@@ -19,8 +17,6 @@ const ErrorModal = ({ onClose, closeModal, errorFlag}) => {
  if (closeModal) {
     // setCloseModal(false)
     errorFlag.current = true
-    console.log('check errorFlag', errorFlag);
-
     return null;
   }
 

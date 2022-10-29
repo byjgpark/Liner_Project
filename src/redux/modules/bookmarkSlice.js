@@ -1,18 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../../shared/request";
 
-// Getting all the search results from given condition
-export const getSearchThunk = createAsyncThunk(
-  "getResultThunk",
+// posting bookmark for the search result
+export const postBookmarkThunk = createAsyncThunk(
+  "postBookmarkThunk",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await instance.get(`search/documents`, {
-        params: {
-          query: payload.query,
-          size: payload.size,
-          from: payload.from,
-        },
-      });
+      const { data } = await instance.post(`collection/document/{document-${payload}}`);
       return thunkAPI.fulfillWithValue(data.documents);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -20,18 +14,12 @@ export const getSearchThunk = createAsyncThunk(
   }
 );
 
-// Getting the search results when scrolled to the bottom of the page
-export const getScrollThunk = createAsyncThunk(
-  "getScrollThunk",
+// delete bookmark for the search result
+export const deleteBookmarkThunk = createAsyncThunk(
+  "deleteBookmarkThunk",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await instance.get(`search/documents`, {
-        params: {
-          query: payload.query,
-          size: payload.size,
-          from: payload.from,
-        },
-      });
+      const { data } = await instance.delete(`collection/document/{document-${payload}}`);
       return thunkAPI.fulfillWithValue(data.documents);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -40,7 +28,7 @@ export const getScrollThunk = createAsyncThunk(
 );
 
 const initialState = {
-  results: [],
+  status: [],
   isLoading: false,
   error: null,
 };
@@ -55,27 +43,27 @@ const searchSlice = createSlice({
   },
   extraReducers: {
     // Getting all the search results from given condition
-    [getSearchThunk.pending]: (state) => {
+    [postBookmarkThunk.pending]: (state) => {
       state.isLoading = true;
     },
-    [getSearchThunk.fulfilled]: (state, action) => {
+    [postBookmarkThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.results = action.payload;
     },
-    [getSearchThunk.rejected]: (state, action) => {
+    [postBookmarkThunk.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
 
     // Getting the search results when scrolled to the bottom of the page
-    [getScrollThunk.pending]: (state) => {
+    [deleteBookmarkThunk.pending]: (state) => {
       state.isLoading = false;
     },
-    [getScrollThunk.fulfilled]: (state, action) => {
+    [deleteBookmarkThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.results = [...state.results].concat(action.payload);
     },
-    [getScrollThunk.rejected]: (state, action) => {
+    [deleteBookmarkThunk.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

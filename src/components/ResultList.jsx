@@ -6,47 +6,95 @@ import DfltThumbIcon from "../static/images/default_thumb_icon.png";
 import BookmarkIcon from "../static/images/bookmark_icon.png";
 import UnBookmarkIcon from "../static/images/unbookmark_icon.png";
 import DfltFaviIcon from "../static/images/default_favi_icon.png";
+// Redux
+import { postBookmarkThunk, deleteBookmarkThunk } from "../redux/modules/bookmarkSlice";
 
-const ResultList = ({result}) => {
+const ResultList = ({ result }) => {
   // Hook : to toggle on/off the bookmark
   const [check, setCheck] = useState(false);
-  
-  console.log('check result', result.imageUrl)
+
+  // Var : Search result's ID
+  const id = result.id
+
+  // Func : handling fallback image with default image 
+  const addDefaultSrc = (ev) => {
+    ev.target.src = DfltThumbIcon
+  }
+
+  const addSecondDefaultSrc = (ev) => {
+    ev.target.src = DfltFaviIcon
+  }
+
+  const handleBookMark = (check,id) => {
+    setCheck(!check)
+  }
 
   return (
     <StyCon>
       <StyWrap>
+        {/* <Img
+          className="DfltThumbIcon"
+          src={[result.imageUrl, DfltThumbIcon]}
+          alt="dflt-thumb-icon"
+        /> */}
         <img
           className="DfltThumbIcon"
           src={result.imageUrl}
           alt="dflt-thumb-icon"
+          //   onError={(event) => {
+          //     if (imgError) {
+          //       setImgError(false);
+          //     }
+          //     event.target.src = DfltThumbIcon;
+          //   }}
+        //   onError={(e) => {
+        //     if (e.target.src !== DfltThumbIcon) {
+        //       e.target.src = DfltThumbIcon;
+        //     }
+        //   }}
+        onError={addDefaultSrc}
         />
         <div className="TextWrap">
-          <div className="Title">
-            {result.title}
-          </div>
+          <div className="Title">{result.title}</div>
           <div className="NetLocWrap">
-            <img
+             <img
               className="DfltFaviIcon"
               src={result.faviconUrl}
               alt="dflt-favi-icon"
-            />
+            //   onError={(event) => {
+            //     if (imgError2) {
+            //       setImgError2(false);
+            //     }
+            //     event.target.src = DfltFaviIcon;
+            //   }}
+            onError={(event) => {
+                if (event.target.src !== DfltFaviIcon) {
+                    event.target.src = DfltFaviIcon;
+                }
+              }}
+            // onError={addSecondDefaultSrc}
+            /> 
+            {/* <Img
+              className="DfltFaviIcon"
+              src={[result.faviconUrl, DfltFaviIcon]}
+              alt="dflt-favi-icon"
+            /> */}
             <div className="NetLoc">{result.netloc}</div>
           </div>
         </div>
         {check ? (
           <img
-            onClick={() => setCheck(!check)}
+            onClick={() => handleBookMark(check,id)}
             className="BookmarkIcon"
             src={BookmarkIcon}
             alt="bookmark-icon"
           />
         ) : (
           <img
-            onClick={() => setCheck(!check)}
+            onClick={() => handleBookMark(check,id)}
             className="BookmarkIcon"
             src={UnBookmarkIcon}
-            alt="bookmark-icon"
+            alt="unbookmark-icon"
           />
         )}
       </StyWrap>
@@ -57,6 +105,7 @@ const ResultList = ({result}) => {
 export default ResultList;
 
 const StyCon = styled.div`
+
   border: 1px solid green;
   width: 100%;
   height: 102px;
@@ -83,7 +132,7 @@ const StyWrap = styled.div`
     margin-right: 16px;
   }
 
-  .TextWrap{
+  .TextWrap {
     margin-right: 43.88px;
   }
 

@@ -1,6 +1,6 @@
 import "./App.css";
 // React
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 // Styled-Component
 import styled from "styled-components";
 // React Router Dom
@@ -12,10 +12,17 @@ import Result from "./pages/Result";
 import { AppContext } from "./shared/context";
 
 function App() {
+
+  // Hook : getting search keyword from the search bar 
   const [search, setSearch] = useState("");
 
+  // Hook : to close modal
+  const [closeModal, setCloseModal] = useState(false);
+
+  let errorFlag = useRef(false)
+
   return (
-    <AppContext.Provider value={{ search, setSearch }}>
+    <AppContext.Provider value={{ search, setSearch, closeModal,setCloseModal, errorFlag}}>
       <StyCon>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -29,7 +36,7 @@ function App() {
 export default App;
 
 const StyCon = styled.div`
-
+  /* overflow: hidden; */
   height: 100vh;
   width: 768px;
   margin: 0 auto;

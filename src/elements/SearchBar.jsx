@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 import { AppContext } from "../shared/context";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { getResultThunk } from "../redux/modules/searchSlice"; 
+import { getSearchThunk } from "../redux/modules/searchSlice";
 
 const SearchBar = () => {
   // Dispatch
@@ -23,6 +23,9 @@ const SearchBar = () => {
   let currentPath = useLocation();
   // Enabling to navigate to another component
   let navigate = useNavigate();
+
+  // Context API : to change the boolean closeModal via Context API
+  let {setCloseModal } = useContext(AppContext);
 
   // Hook : to hold the search text from search bar
   const { search, setSearch } = useContext(AppContext);
@@ -34,16 +37,19 @@ const SearchBar = () => {
     setSearch(e.target.value);
   };
   
+  // Func : when entered the enter key, get the search result 
+  // then, change closeModal to false corresponding to its pathname
   const handleKeyUp = (e) => {
     if (currentPath.pathname === "/") {
       if (e.keyCode === 13) {
-        dispatch(getResultThunk())
+        dispatch(getSearchThunk({query:search, size:9, from:0}))
+        setCloseModal(false);
         navigate("/result");
       }
     } else {
       if (e.keyCode === 13) {
-        dispatch(getResultThunk())
-        alert("search up");
+        dispatch(getSearchThunk({query:search, size:9, from:0}))
+        setCloseModal(false);
       }
     }
   };

@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = () => {
-
   // Enabling to navigate to another component
   let navigate = useNavigate();
 
@@ -26,8 +25,13 @@ const Header = () => {
 export default Header;
 
 const StyCon = styled.div`
+  position: sticky;
+  top: 0px;
+  z-index: 1000;
+
   display: flex;
   align-items: center;
+
   border: 1px solid red;
   height: 78px;
   width: 100%;

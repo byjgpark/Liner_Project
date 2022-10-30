@@ -36,10 +36,7 @@ function App() {
 export default App;
 
 const StyCon = styled.div`
-  /* overflow: hidden; */
   height: 100vh;
   width: 768px;
   margin: 0 auto;
-
-  border: 1px solid blue
 `;

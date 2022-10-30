@@ -122,7 +122,6 @@ const ResultList = ({ result }) => {
 export default ResultList;
 
 const StyCon = styled.div`
-  border: 1px solid green;
   width: 100%;
   height: 102px;
   display: flex;
@@ -134,7 +133,6 @@ const StyCon = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
     border-radius: 16px;
 
     width: 728px;
@@ -150,8 +148,6 @@ const StyWrap = styled.div`
   display: flex;
   width: 684.13px;
   height: 72px;
-
-  border: 1px solid blue;
 
   .TextWrap {
     display: flex;

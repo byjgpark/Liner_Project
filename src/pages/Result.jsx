@@ -16,6 +16,7 @@ import { getScrollThunk } from "../redux/modules/searchSlice";
 import { useInView } from "react-intersection-observer";
 
 const Result = () => {
+  
   // Var : Dispatch
   const dispatch = useDispatch();
 
@@ -109,11 +110,13 @@ const Result = () => {
       <StyBody>
         {results.map((result, index) => {
           return (
+            <>
             <ResultList
               key={index}
               result={result}
               bookmarkError={bookmarkError}
             ></ResultList>
+            </>
           );
         })}
         <div ref={ref} />
@@ -133,8 +136,9 @@ const Result = () => {
 export default Result;
 
 const StyBody = styled.div`
-  /* border: 5px solid pink; */
   margin: auto;
-  overflow-y: scroll;
+  margin-top: 88px;
+  /* overflow-y: scroll; */
   max-height: 898px;
+
 `;

@@ -7,13 +7,19 @@ import BackIcon from "../static/images/back_icon.png";
 import { useNavigate } from "react-router-dom";
 // Styled-Component
 import styled from "styled-components";
+// CustomHook
+import { useScrollPosition } from "./useScrollPosition";
+
 
 const Header = () => {
   // Enabling to navigate to another component
-  let navigate = useNavigate();
+  let navigate = useNavigate
 
+  // CustomHook : to keep track of the scroll position
+  const scrollPosition = useScrollPosition();
+   
   return (
-    <StyCon>
+    <StyCon scrollPosition={scrollPosition}>
       <div className="BackWrap" onClick={() => navigate(-1)}>
         <img className="BackIcon" src={BackIcon} alt="back-icon" />
       </div>
@@ -25,16 +31,18 @@ const Header = () => {
 export default Header;
 
 const StyCon = styled.div`
-  position: sticky;
+  position: fixed;
   top: 0px;
   z-index: 1000;
+  background-color: white;
+
+  border-bottom: ${props => props.scrollPosition > 0 ?'1px solid rgba(242, 243, 247, 1)' : 'none'};
 
   display: flex;
   align-items: center;
 
-  border: 1px solid red;
   height: 78px;
-  width: 100%;
+  width: 768px;
 
   .BackWrap {
     width: 40px;

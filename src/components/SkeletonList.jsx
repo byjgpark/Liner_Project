@@ -25,7 +25,6 @@ const SkeletonList = () => {
 export default SkeletonList;
 
 const StyCon = styled.div`
-  border: 1px solid green;
   width: 100%;
   height: 102px;
   display: flex;

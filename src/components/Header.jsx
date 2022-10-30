@@ -13,14 +13,14 @@ import { useScrollPosition } from "./useScrollPosition";
 
 const Header = () => {
   // Enabling to navigate to another component
-  let navigate = useNavigate
+  let navigate = useNavigate()
 
   // CustomHook : to keep track of the scroll position
   const scrollPosition = useScrollPosition();
    
   return (
     <StyCon scrollPosition={scrollPosition}>
-      <div className="BackWrap" onClick={() => navigate(-1)}>
+      <div className="BackWrap" onClick={() => navigate('/')}>
         <img className="BackIcon" src={BackIcon} alt="back-icon" />
       </div>
       <SearchBar></SearchBar>

@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
 // Styled-Component
 import styled from "styled-components";
-// React Router Dom
-import {Link} from 'react-router-dom'
 // Icon
 import DfltThumbIcon from "../static/images/default_thumb_icon.png";
 import BookmarkIcon from "../static/images/bookmark_icon.png";
@@ -38,14 +36,10 @@ const ResultList = ({ result }) => {
     ev.target.src = DfltThumbIcon;
   };
 
-  // Func : handling fallback icon with default icon
-  const addSecondDefaultSrc = (ev) => {
-    ev.target.src = DfltFaviIcon;
-  };
-
+  // Func : when clicked, it will redirect to its URL
   const handleClickedUrl = () => {
-    window.location.href=result.url;
-  }
+    window.location.href = result.url;
+  };
 
   // Func : When 200, if check is false, then dispatch bookmark API. Otherwise, unbook API
   // change the boolean value of check
@@ -72,9 +66,10 @@ const ResultList = ({ result }) => {
     }
   };
 
+  let [errorflag, setErrorFlag] = useState(true);
   return (
     <StyCon>
-      <div className="HoverCon" >
+      <div className="HoverCon">
         <StyWrap>
           <img
             className="DfltThumbIcon"
@@ -83,13 +78,20 @@ const ResultList = ({ result }) => {
             onError={addDefaultSrc}
           />
           <div className="TextWrap">
-            <div className="Title" onClick={handleClickedUrl}>{result.title}</div>
+            <div className="Title" onClick={handleClickedUrl}>
+              {result.title}
+            </div>
             <div className="NetLocWrap">
               <img
                 className="DfltFaviIcon"
                 src={result.faviconUrl}
                 alt="dflt-favi-icon"
-                onError={addSecondDefaultSrc}
+                onError={(e) => {
+                  if (errorflag) {
+                    setErrorFlag(false);
+                    e.target.src = DfltFaviIcon;
+                  }
+                }}
               />
               <div className="NetLoc">{result.netloc}</div>
             </div>
@@ -205,8 +207,8 @@ const StyWrap = styled.div`
     width: 40px;
     height: 40px;
 
-    &:hover{
-        background-color: rgba(242, 243, 247, 1);
+    &:hover {
+      background-color: rgba(242, 243, 247, 1);
     }
   }
   .BookmarkIcon {

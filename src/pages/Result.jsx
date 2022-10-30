@@ -41,9 +41,6 @@ const Result = () => {
   // Context API : to change the boolean closeModal via Context API
   let { closeModal, setCloseModal } = useContext(AppContext);
 
-  // Context API : getting search keyword from the search bar via Context API
-  let { errorFlag } = useContext(AppContext);
-
   // Ref : to increment from whenever scrolled to the bottom of page
   const countFrom = useRef(9);
 
@@ -66,6 +63,7 @@ const Result = () => {
   // Var : a number of skeletons UI
   const rowSkeletons = 10;
 
+
   // While loading the search result, show the skeleton UI
   if (loading) {
     let rows = [];
@@ -73,11 +71,11 @@ const Result = () => {
     for (let index = 0; index < rowSkeletons; index++) {
       rows.push(<SkeletonList key={index}></SkeletonList>);
     }
-
+   
     return (
       <>
         <Header></Header>
-        <StyBody>{rows}</StyBody>
+        <StyBody >{rows}</StyBody>
       </>
     );
   }
@@ -85,16 +83,18 @@ const Result = () => {
   // if an error ocurred, display modal && skeleton UI
   if (searchError === "ERR_BAD_REQUEST") {
     let rows = [];
+    let count = 0
     for (let index = 0; index < rowSkeletons; index++) {
       rows.push(<SkeletonList key={index}></SkeletonList>);
+      count++
     }
 
     return (
+   
       <>
-        <Header></Header>
-        <StyBody>{rows}</StyBody>
+        <Header ></Header>
+        <StyBody key={count}>{rows}</StyBody>
         <ErrorModal
-          errorFlag={errorFlag}
           error={searchError}
           onClose={() => setCloseModal(true)}
           closeModal={closeModal}
@@ -123,7 +123,6 @@ const Result = () => {
       </StyBody>
       {bookmarkError === "ERR_BAD_REQUEST" && (
         <ErrorModal
-          errorFlag={errorFlag}
           error={searchError}
           onClose={() => setCloseModal(true)}
           closeModal={closeModal}
@@ -138,7 +137,6 @@ export default Result;
 const StyBody = styled.div`
   margin: auto;
   margin-top: 88px;
-  /* overflow-y: scroll; */
   max-height: 898px;
 
 `;

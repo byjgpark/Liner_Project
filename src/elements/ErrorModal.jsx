@@ -1,36 +1,36 @@
 // React
 import React from "react";
 // Redux
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 // Styled-Component
 import styled from "styled-components";
 // Icon
 import ExitIcon from "../static/images/exit_icon.png";
 import { changeError } from "../redux/modules/searchSlice";
 
-const ErrorModal = ({ onClose, closeModal, errorFlag}) => {
+const ErrorModal = ({ onClose, closeModal, errorFlag }) => {
+  // Redux : dispatch
+  const dispatch = useDispatch();
 
- // Redux : dispatch
- const dispatch = useDispatch();
-
- // if showModal is false, the modal will not be shown
- if (closeModal) {
+  // if showModal is false, the modal will not be shown
+  if (closeModal) {
     // setCloseModal(false)
-    errorFlag.current = true
+    errorFlag.current = true;
     return null;
   }
-
+  
+  // Func : to close the modal when the buttoms get clicked
   const handleClose = () => {
-    onClose()
-    dispatch(changeError())
-  }
+    onClose();
+    dispatch(changeError());
+  };
 
   return (
     <ModalCon>
       <ModalContent>
         <ModalHeader>
           <div className="modal-title">Something went wrong</div>
-          <img onClick={handleClose}src={ExitIcon} alt="exit_icon"></img>
+          <img onClick={handleClose} src={ExitIcon} alt="exit_icon"></img>
         </ModalHeader>
         <ModalBody></ModalBody>
         <ModalFooter>

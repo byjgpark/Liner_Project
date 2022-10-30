@@ -18,11 +18,9 @@ function App() {
 
   // Hook : to close modal
   const [closeModal, setCloseModal] = useState(false);
-
-  let errorFlag = useRef(false)
-
+  
   return (
-    <AppContext.Provider value={{ search, setSearch, closeModal,setCloseModal, errorFlag}}>
+    <AppContext.Provider value={{ search, setSearch, closeModal,setCloseModal}}>
       <StyCon>
         <Routes>
           <Route path="/" element={<Home />} />

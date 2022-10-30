@@ -21,7 +21,7 @@
 - react-router-dom
   * 뒤로 가기나 search-bar 에서 다른 component로 navigate 하기 위해사용
 
-## Project tree
+## Project file tree
  * [components](https://github.com/byjgpark/Liner_Project/tree/main/src/components)
    * [Header.jsx]([./dir2/file21.ext](https://github.com/byjgpark/Liner_Project/blob/main/src/components/Header.jsx))
    * [ResultList.jsx]([./dir2/file21.ext](https://github.com/byjgpark/Liner_Project/blob/main/src/components/ResultList.jsx))

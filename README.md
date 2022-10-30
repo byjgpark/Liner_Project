@@ -1,4 +1,6 @@
 # 라이너 프론트 엔드 엔지니어 사전과제
+![Vector](https://user-images.githubusercontent.com/48500149/198866426-3e45e034-7ff7-4da8-9c38-6dcd44abdbf6.png)
+
 ## ⏳ 프로젝트 기간
 ### 2022년 10월 26일 - 2022년 10월 30일
 ## 사용한 기술스택및 라이브러리
